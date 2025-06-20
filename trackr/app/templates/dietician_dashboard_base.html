@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dietician Dashboard</title>
+
+  <!-- Bootstrap & Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Orbitron Logo Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+    }
+
+    .dashboard-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #1c1c1c;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2rem 1rem 1rem;
+    }
+
+    .sidebar .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #00b894;
+      text-align: center;
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      margin: 0.4rem 0;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #e0e0e0;
+      font-size: 1rem;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #00b894;
+      color: #fff;
+    }
+
+    .sidebar a i {
+      margin-right: 12px;
+      font-size: 1.1rem;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 2.5rem;
+      background-color: #ffffff;
+      border-top-left-radius: 20px;
+      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .content h2 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #1c1c1c;
+    }
+
+    .content p {
+      color: #555;
+    }
+
+    footer {
+      background-color: #1c1c1c;
+      color: #ccc;
+    }
+
+    footer h4,
+    footer h6 {
+      color: #00b894;
+    }
+
+    footer a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #00b894;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div>
+      <div class="logo">Trackr</div>
+      <a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a>
+      <a href="#"><i class="fas fa-user-friends"></i> Clients</a>
+      <a href="#"><i class="fas fa-calendar-alt"></i> Appointments</a>
+      <a href="#"><i class="fas fa-comments"></i> Chat</a>
+      <a href="#"><i class="fas fa-notes-medical"></i> Reports / Recommendations</a>
+      <a href="#"><i class="fas fa-user-cog"></i> Profile</a>
+      <a href="{% url 'userlogout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="content">
+    {% block content %}
+    <h2>Hello {{ user }}, Welcome to your dietician dashboard!</h2>
+    <p>Here you can manage your clients, appointments, and provide health recommendations.</p>
+    {% endblock %}
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="pt-4">
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h4 class="mb-2" style="font-family: 'Orbitron', sans-serif;">Trackr</h4>
+        <p>Your personalized wellness companion. Track your meals, connect with dieticians, and stay healthy effortlessly.</p>
+      </div>
+
+      <div class="col-md-2 mb-4">
+        <h6 class="fw-bold">Quick Links</h6>
+        <ul class="list-unstyled">
+          <li><a href="{% url "dietician_workspace" %}">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="{% url 'signin' %}">Login</a></li>
+          <li><a href="{% url 'signup' %}">Register</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <h6 class="fw-bold">Resources</h6>
+        <ul class="list-unstyled">
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <h6 class="fw-bold">Get in Touch</h6>
+        <p class="mb-1"><i class="fas fa-envelope me-2 text-success"></i> support@trackr.com</p>
+        <p class="mb-1"><i class="fas fa-phone me-2 text-success"></i> +91 98765 43210</p>
+        <div class="mt-2">
+          <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr class="border-secondary">
+    <div class="text-center py-2 small">
+      &copy; {{ now|date:"Y" }} Trackr. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

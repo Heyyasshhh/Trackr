@@ -1,0 +1,186 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    {% comment %} <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"> {% endcomment %}
+    {% comment %} <link rel="stylesheet" href="{% static 'css/global.css' %}"> {% endcomment %}
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .navbar {
+            background-color: #1c1c1c;
+            padding: 1rem 2rem;
+            color: white;
+        }
+
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #00b894;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            }
+
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #f0f0f0;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #00b894;
+            left: 0;
+            bottom: -5px;
+            transition: 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #00b894;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        footer {
+      background-color: #1c1c1c;
+      color: #ccc;
+    }
+
+    footer h4,
+    footer h6 {
+      color: #00b894;
+    }
+
+    footer a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #00b894;
+      text-decoration: underline;
+    }
+</style>
+
+
+    <!--Navbar-->
+    <div class="container-fluid navbar">
+    <div class="navbar-content">
+        <a href="/" class="logo">
+            <span>Trackr</span>
+        </a>
+        <ul class="nav-links ms-auto">
+            <li><a href="/">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="{% url "signup" %}">Sign Up</a></li>
+            <li><a href="{% url "signin" %}">Sign In</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </div>
+</div>
+
+
+
+    <!-- Main -->
+    {% block content%}
+
+    {% endblock %}
+
+    <!-- footer -->
+    <footer class="pt-4">
+    <div class="container py-4">
+        <div class="row">
+        <div class="col-md-4 mb-4">
+            <h4 class="mb-2" style="font-family: 'Orbitron', sans-serif;">Trackr</h4>
+            <p>Your personalized wellness companion. Track your meals, connect with dieticians, and stay healthy effortlessly.</p>
+        </div>
+
+        <div class="col-md-2 mb-4">
+            <h6 class="fw-bold">Quick Links</h6>
+            <ul class="list-unstyled">
+            <li><a href="{% url "dietician_workspace" %}">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="{% url 'signin' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Register</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <h6 class="fw-bold">Resources</h6>
+            <ul class="list-unstyled">
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <h6 class="fw-bold">Get in Touch</h6>
+            <p class="mb-1"><i class="fas fa-envelope me-2 text-success"></i> support@trackr.com</p>
+            <p class="mb-1"><i class="fas fa-phone me-2 text-success"></i> +91 98765 43210</p>
+            <div class="mt-2">
+            <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        </div>
+        <hr class="border-secondary">
+        <div class="text-center py-2 small">
+        &copy; {{ now|date:"Y" }} Trackr. All rights reserved.
+        </div>
+    </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
