@@ -1,186 +1,107 @@
 {% load static %}
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900"
+    />
     <title>{% block title %}{% endblock title %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    {% comment %} <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"> {% endcomment %}
-    {% comment %} <link rel="stylesheet" href="{% static 'css/global.css' %}"> {% endcomment %}
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-
-</head>
-
-<body>
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .navbar {
-            background-color: #1c1c1c;
-            padding: 1rem 2rem;
-            color: white;
-        }
-
-        .navbar-content {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            width: 100%;
-        }
-
-
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: #00b894;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            }
-
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links li a {
-            text-decoration: none;
-            color: #f0f0f0;
-            font-size: 1rem;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links li a::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: #00b894;
-            left: 0;
-            bottom: -5px;
-            transition: 0.3s;
-        }
-
-        .nav-links li a:hover {
-            color: #00b894;
-        }
-
-        .nav-links li a:hover::after {
-            width: 100%;
-        }
-
-        footer {
-      background-color: #1c1c1c;
-      color: #ccc;
-    }
-
-    footer h4,
-    footer h6 {
-      color: #00b894;
-    }
-
-    footer a {
-      color: #ccc;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      color: #00b894;
-      text-decoration: underline;
-    }
-</style>
-
-
-    <!--Navbar-->
-    <div class="container-fluid navbar">
-    <div class="navbar-content">
-        <a href="/" class="logo">
-            <span>Trackr</span>
-        </a>
-        <ul class="nav-links ms-auto">
-            <li><a href="/">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="{% url "signup" %}">Sign Up</a></li>
-            <li><a href="{% url "signin" %}">Sign In</a></li>
-            <li><a href="#">Contact Us</a></li>
-        </ul>
-    </div>
-</div>
-
-
-
-    <!-- Main -->
-    {% block content%}
-
-    {% endblock %}
-
-    <!-- footer -->
-    <footer class="pt-4">
-    <div class="container py-4">
-        <div class="row">
-        <div class="col-md-4 mb-4">
-            <h4 class="mb-2" style="font-family: 'Orbitron', sans-serif;">Trackr</h4>
-            <p>Your personalized wellness companion. Track your meals, connect with dieticians, and stay healthy effortlessly.</p>
-        </div>
-
-        <div class="col-md-2 mb-4">
-            <h6 class="fw-bold">Quick Links</h6>
-            <ul class="list-unstyled">
-            <li><a href="{% url "dietician_workspace" %}">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="{% url 'signin' %}">Login</a></li>
-            <li><a href="{% url 'signup' %}">Register</a></li>
-            </ul>
-        </div>
-
-        <div class="col-md-3 mb-4">
-            <h6 class="fw-bold">Resources</h6>
-            <ul class="list-unstyled">
-            <li><a href="#">FAQs</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            </ul>
-        </div>
-
-        <div class="col-md-3 mb-4">
-            <h6 class="fw-bold">Get in Touch</h6>
-            <p class="mb-1"><i class="fas fa-envelope me-2 text-success"></i> support@trackr.com</p>
-            <p class="mb-1"><i class="fas fa-phone me-2 text-success"></i> +91 98765 43210</p>
-            <div class="mt-2">
-            <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-stone-50 group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <!-- Header -->
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#edefec] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#141613]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_6_535)">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
+                    fill="currentColor"
+                  ></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_6_535"><rect width="48" height="48" fill="white"></rect></clipPath>
+                </defs>
+              </svg>
             </div>
-        </div>
-        </div>
-        <hr class="border-secondary">
-        <div class="text-center py-2 small">
-        &copy; {{ now|date:"Y" }} Trackr. All rights reserved.
-        </div>
-    </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-        crossorigin="anonymous"></script>
-</body>
+            <h2 class="text-[#141613] text-lg font-bold leading-tight tracking-[-0.015em]">Trackr</h2>
+          </div>
 
+          <!-- Navigation -->
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              {% if not request.user.is_authenticated %}
+              <a class="text-[#141613] text-sm font-medium leading-normal" href="/">Overview</a>
+              {% endif %}
+              <a class="text-[#141613] text-sm font-medium leading-normal" href="#">About Us</a>
+              <a class="text-[#141613] text-sm font-medium leading-normal" href="#">Contact Us</a>
+              {% if request.user.is_authenticated %}
+              <a class="text-[#141613] text-sm font-medium leading-normal" href="{% url 'user_dashboard' %}">Dashboard</a>
+              {% endif %}
+            </div>
+
+            <div class="flex gap-2">
+              {% if request.user.is_authenticated %}
+              <a
+                href="#"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#769966] text-[#141613] text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Join Now</span>
+              </a>
+              <a
+                href="#"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#edefec] text-[#141613] text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Dietician</span>
+              </a>
+              <a href="#"><div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAS2k_nafIZkZdz7G1V77gcLmJK2D7AoGkfcZJAQ8unw6WX7nbEL59Z7OdlHiQtabTdWPVm-rPyzsLowqZXj-yMst8pnr-_PtEneJIUYEO8QsupmvaGjdhsDhNibII8BosH4ZnOof_HpARym4g0FCAtWNmTjrZy_YxAzVOqt75XiR-8TGI0ag329GMKgf_yeSzMMV5g4qFeZokaUex5C3EngP2ORUHNzDQa6gmdcTpHX64rhQDtvY0evUaJgCiEUfUKs9PR725njKM");'
+            ></div></a>
+              {% else %}
+              <a
+                href="{% url 'signup' %}"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#769966] text-[#141613] text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Sign Up</span>
+              </a>
+              <a
+                href="{% url 'signin' %}"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#edefec] text-[#141613] text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Log In</span>
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </header>
+
+        {% block content %}{% endblock content %}
+
+        <!-- Footer -->
+        <footer class="flex justify-center">
+          <div class="flex max-w-[960px] flex-1 flex-col">
+            <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
+              <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
+                <a class="text-[#6f7c6a] text-base font-normal leading-normal min-w-40" href="{% url "userlogout" %}">About Us</a>
+                <a class="text-[#6f7c6a] text-base font-normal leading-normal min-w-40" href="#">Contact</a>
+                <a class="text-[#6f7c6a] text-base font-normal leading-normal min-w-40" href="#">Privacy Policy</a>
+                <a class="text-[#6f7c6a] text-base font-normal leading-normal min-w-40" href="#">Terms of Service</a>
+              </div>
+              <p class="text-[#6f7c6a] text-base font-normal leading-normal">© 2024 HealthTrack. All rights reserved.</p>
+            </footer>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
 </html>

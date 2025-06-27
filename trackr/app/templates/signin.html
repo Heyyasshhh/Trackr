@@ -1,123 +1,107 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block title %}Sign In{% endblock title %}
 
 {% block content %}
-<style>
-    body {
-        font-family: 'Segoe UI', sans-serif;
-        background-color: #f5f7fa;
-    }
+<div class="px-4 md:px-40 flex flex-1 justify-center py-5">
+  <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5">
+    <h2 class="text-[#141613] text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">Sign In</h2>
 
-    .login-container {
-        max-width: 400px;
-        margin: 3rem auto;
-        padding: 2rem;
-        background-color: #fff;
-        border-radius: 16px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    }
-
-    .social-btn {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 10px;
-        text-align: center;
-        cursor: pointer;
-        transition: background 0.3s;
-        font-weight: 500;
-    }
-
-    .social-btn:hover {
-        background-color: #f0f0f0;
-    }
-
-    .social-icon {
-        margin-right: 8px;
-    }
-
-    .bottom-links {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 1rem;
-    }
-
-    .bottom-links a,
-    .text-center a {
-        font-size: 0.9rem;
-        color: #00b894;
-        text-decoration: none;
-    }
-
-    .bottom-links a:hover,
-    .text-center a:hover {
-        text-decoration: underline;
-    }
-</style>
-
-{% if messages %}
-<div class="position-fixed top-0 start-50 translate-middle-x mt-3 z-3" style="min-width: 300px; max-width: 600px;">
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm px-4 py-3 rounded-3 animate__animated animate__fadeInDown"
-         role="alert"
-         style="border-left: 5px solid 
-         {% if message.tags == 'success' %}#28a745
-         {% elif message.tags == 'error' %}#dc3545
-         {% elif message.tags == 'warning' %}#ffc107
-         {% else %}#17a2b8{% endif %};">
+    {% if messages %}
+    <div class="px-4">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm px-4 py-3 rounded-3 animate__animated animate__fadeInDown"
+        role="alert"
+        style="border-left: 5px solid 
+        {% if message.tags == 'success' %}#28a745
+        {% elif message.tags == 'error' %}#dc3545
+        {% elif message.tags == 'warning' %}#ffc107
+        {% else %}#17a2b8{% endif %};">
         <strong class="text-capitalize">{{ message.tags }}:</strong> {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-</div>
-{% endif %}
+    {% endif %}
 
-<div class="login-container">
-    <h3 class="text-center mb-4">Sign In</h3>
+    <form method="POST" class="w-full">
+      {% csrf_token %}
 
-    <form method="POST">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="uemail" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="uemail" name="uemail" placeholder="example@email.com" required>
-        </div>
+      <!-- Email -->
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+        <label class="flex flex-col min-w-40 flex-1">
+          <input
+            type="email"
+            name="uemail"
+            id="uemail"
+            placeholder="Email"
+            required
+            class="form-input flex w-full resize-none overflow-hidden rounded-xl text-[#141613] border border-[#daded8] bg-stone-50 h-14 placeholder:text-[#6f7c6a] p-[15px] text-base font-normal leading-normal"
+          />
+        </label>
+      </div>
 
-        <div class="mb-3">
-            <label for="upass" class="form-label">Password</label>
-            <input type="password" class="form-control" id="upass" name="upass" placeholder="Password" required>
-        </div>
+      <!-- Password -->
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+        <label class="flex flex-col min-w-40 flex-1">
+          <input
+            type="password"
+            name="upass"
+            id="upass"
+            placeholder="Password"
+            required
+            class="form-input flex w-full resize-none overflow-hidden rounded-xl text-[#141613] border border-[#daded8] bg-stone-50 h-14 placeholder:text-[#6f7c6a] p-[15px] text-base font-normal leading-normal"
+          />
+        </label>
+      </div>
 
-        <div class="bottom-links">
-            <a href="#">Forgot Password?</a>
-        </div>
+      <!-- Forgot Password -->
+      <div class="px-4 text-right text-sm text-[#6f7c6a] underline">
+        <a href="#">Forgot Password?</a>
+      </div>
 
-        <button type="submit" class="btn btn-success w-100 mt-3">Sign In</button>
-    </form>
+      <!-- Submit Button -->
+      <div class="flex px-4 py-4">
+        <button type="submit"
+          class="w-full bg-[#769966] hover:bg-[#5e7d50] text-white py-3 px-6 rounded-full text-sm font-bold tracking-wide">
+          <span class="truncate">Sign In</span>
+        </button>
+      </div>
 
-    <hr class="my-4">
+      <!-- Divider -->
+      <hr class="mx-4 my-2 border-[#daded8]">
 
-    <div class="d-grid gap-2">
-        <div class="social-btn">
-            <i class="fab fa-google social-icon text-danger"></i> Continue with Google
-        </div>
-        <div class="social-btn">
-            <i class="fab fa-facebook-f social-icon text-primary"></i> Continue with Facebook
-        </div>
-    </div>
+      <!-- Social Logins -->
+      <div class="flex flex-col gap-3 px-4">
+        <button
+          type="button"
+          class="border border-[#daded8] text-[#141613] font-medium py-2 rounded-xl hover:bg-stone-100 flex items-center justify-center gap-2"
+        >
+          <i class="fab fa-google text-red-500"></i> Continue with Google
+        </button>
+        <button
+          type="button"
+          class="border border-[#daded8] text-[#141613] font-medium py-2 rounded-xl hover:bg-stone-100 flex items-center justify-center gap-2"
+        >
+          <i class="fab fa-facebook-f text-blue-600"></i> Continue with Facebook
+        </button>
+      </div>
 
-    <p class="text-center mt-4">
+      <!-- Sign up link -->
+      <p class="text-[#6f7c6a] text-sm font-normal leading-normal pb-3 pt-5 px-4 text-center underline">
         Don’t have an account? <a href="{% url 'signup' %}">Sign up here</a>
-    </p>
+      </p>
+    </form>
+  </div>
 </div>
 
+<!-- Optional: Auto close alert -->
 <script>
-    setTimeout(() => {
-        const alerts = document.querySelectorAll('.alert');
-        alerts.forEach(alert => {
-            bootstrap.Alert.getOrCreateInstance(alert).close();
-        });
-    }, 5000);
+  setTimeout(() => {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => {
+      bootstrap.Alert.getOrCreateInstance(alert).close();
+    });
+  }, 5000);
 </script>
 {% endblock content %}

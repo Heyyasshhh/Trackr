@@ -1,199 +1,114 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Dashboard</title>
-
-  <!-- Bootstrap & Font Awesome -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <!-- Orbitron Logo Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f5f7fa;
-      margin: 0;
-    }
-
-    .dashboard-container {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    .sidebar {
-      width: 250px;
-      background-color: #1c1c1c;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 2rem 1rem 1rem;
-    }
-
-    .sidebar .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #00b894;
-      text-align: center;
-      margin-bottom: 2rem;
-      letter-spacing: 1px;
-    }
-
-    .sidebar a {
-      display: flex;
-      align-items: center;
-      padding: 0.75rem 1rem;
-      margin: 0.4rem 0;
-      border-radius: 12px;
-      text-decoration: none;
-      color: #e0e0e0;
-      font-size: 1rem;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .sidebar a:hover,
-    .sidebar a.active {
-      background-color: #00b894;
-      color: #fff;
-    }
-
-    .sidebar a i {
-      margin-right: 12px;
-      font-size: 1.1rem;
-    }
-
-    .sidebar-footer {
-      font-size: 0.75rem;
-      color: #888;
-      text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid #333;
-    }
-
-    .content {
-      flex-grow: 1;
-      padding: 2.5rem;
-      background-color: #ffffff;
-      border-top-left-radius: 20px;
-      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.05);
-    }
-
-    .content h2 {
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #1c1c1c;
-    }
-
-    .content p {
-      color: #555;
-    }
-
-    footer {
-      background-color: #1c1c1c;
-      color: #ccc;
-    }
-
-    footer h4,
-    footer h6 {
-      color: #00b894;
-    }
-
-    footer a {
-      color: #ccc;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      color: #00b894;
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-
-<div class="dashboard-container">
-  <!-- Sidebar -->
-  <nav class="sidebar">
-    <div>
-      <div class="logo">Trackr</div>
-      <a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a>
-      <a href="#"><i class="fas fa-notes-medical"></i> Health Logs</a>
-      <a href="#"><i class="fas fa-calendar-check"></i> Appointments</a>
-      <a href="#"><i class="fas fa-comments"></i> Chat with Dietician</a>
-      <a href="#"><i class="fas fa-chart-line"></i> Progress</a>
-      <a href="#"><i class="fas fa-user-cog"></i> Profile</a>
-      <a href="{% url 'userlogout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+{% block content %}
+<div class="px-40 flex flex-1 justify-center py-5">
+  <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+    <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-[#0e1b16] tracking-light text-[32px] font-bold leading-tight min-w-72">Dashboard</p></div>
+    <h3 class="text-[#0e1b16] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Stats</h3>
+    <div class="flex flex-wrap gap-4 p-4">
+      <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#d0e7df]">
+        <p class="text-[#0e1b16] text-base font-medium leading-normal">📏 Height</p>
+        <p class="text-[#0e1b16] tracking-light text-2xl font-bold leading-tight">172 cm / 180 cm</p>
+      </div>
+      <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#d0e7df]">
+        <p class="text-[#0e1b16] text-base font-medium leading-normal">👣 Weight</p>
+        <p class="text-[#0e1b16] tracking-light text-2xl font-bold leading-tight">72 kg / 65 kg</p>
+      </div>
+      <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#d0e7df]">
+        <p class="text-[#0e1b16] text-base font-medium leading-normal">🥣 Calories</p>
+        <p class="text-[#0e1b16] tracking-light text-2xl font-bold leading-tight">1200 kcal / 1800 kcal</p>
+      </div>
+      <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#d0e7df]">
+        <p class="text-[#0e1b16] text-base font-medium leading-normal">🧊 Water Intake</p>
+        <p class="text-[#0e1b16] tracking-light text-2xl font-bold leading-tight">1.2L / 3.0L</p>
+      </div>
+      <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#d0e7df]">
+        <p class="text-[#0e1b16] text-base font-medium leading-normal">👣 Steps</p>
+        <p class="text-[#0e1b16] tracking-light text-2xl font-bold leading-tight">8,500</p>
+      </div>
     </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="content">
-    {% block content %}
-    <h2>Hi {{ user }}, Welcome to your dashboard!</h2>
-    <p>This is your personalized space to manage your health, appointments, and track your progress.</p>
-    {% endblock %}
-  </main>
-</div>
-
-<!-- Footer -->
-<footer class="pt-4">
-  <div class="container py-4">
-    <div class="row">
-      <!-- Logo + Description -->
-      <div class="col-md-4 mb-4">
-        <h4 class="mb-2" style="font-family: 'Orbitron', sans-serif;">Trackr</h4>
-        <p>Your personalized wellness companion. Track your meals, connect with dieticians, and stay healthy effortlessly.</p>
+    <h3 class="text-[#0e1b16] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Quick Actions</h3>
+    <div class="flex justify-center">
+      <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 max-w-[480px] justify-center">
+        <button
+          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#e7f3ef] text-[#0e1b16] text-sm font-bold leading-normal tracking-[0.015em] grow"
+        >
+          <span class="truncate">BMI Calculator</span>
+        </button>
+        <button
+          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#e7f3ef] text-[#0e1b16] text-sm font-bold leading-normal tracking-[0.015em] grow"
+        >
+          <span class="truncate">Add Health Stats</span>
+        </button>
       </div>
-
-      <!-- Quick Links -->
-      <div class="col-md-2 mb-4">
-        <h6 class="fw-bold">Quick Links</h6>
-        <ul class="list-unstyled">
-          <li><a href="{% url "user_dashboard" %}">Home</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="{% url 'signin' %}">Login</a></li>
-          <li><a href="{% url 'signup' %}">Register</a></li>
-        </ul>
+    </div>
+    <h3 class="text-[#0e1b16] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">BMI Status</h3>
+    <div class="flex flex-col gap-3 p-4">
+      <div class="flex gap-6 justify-between"><p class="text-[#0e1b16] text-base font-medium leading-normal">BMI Status</p></div>
+      <div class="rounded bg-[#d0e7df]"><div class="h-2 rounded bg-[#18dc97]" style="width: 60%;"></div></div>
+      <p class="text-[#4e977e] text-sm font-normal leading-normal">Healthy</p>
+    </div>
+    <h3 class="text-[#0e1b16] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Daily Summary</h3>
+    <div class="p-4">
+      <div class="flex justify-between gap-x-6 py-2">
+        <p class="text-[#4e977e] text-sm font-normal leading-normal">Sleep Duration</p>
+        <p class="text-[#0e1b16] text-sm font-normal leading-normal text-right">7.5 hours</p>
       </div>
-
-      <!-- Resources -->
-      <div class="col-md-3 mb-4">
-        <h6 class="fw-bold">Resources</h6>
-        <ul class="list-unstyled">
-          <li><a href="#">FAQs</a></li>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-        </ul>
+      <div class="flex justify-between gap-x-6 py-2">
+        <p class="text-[#4e977e] text-sm font-normal leading-normal">Mood</p>
+        <p class="text-[#0e1b16] text-sm font-normal leading-normal text-right">Happy 😄</p>
       </div>
-
-      <!-- Contact Info -->
-      <div class="col-md-3 mb-4">
-        <h6 class="fw-bold">Get in Touch</h6>
-        <p class="mb-1"><i class="fas fa-envelope me-2 text-success"></i> support@trackr.com</p>
-        <p class="mb-1"><i class="fas fa-phone me-2 text-success"></i> +91 98765 43210</p>
-        <div class="mt-2">
-          <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="flex gap-3 p-3 flex-wrap pr-4">
+      <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#e7f3ef] pl-4 pr-4">
+        <p class="text-[#0e1b16] text-sm font-medium leading-normal">Gym</p>
+      </div>
+      <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#e7f3ef] pl-4 pr-4">
+        <p class="text-[#0e1b16] text-sm font-medium leading-normal">Walk</p>
+      </div>
+      <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#e7f3ef] pl-4 pr-4">
+        <p class="text-[#0e1b16] text-sm font-medium leading-normal">Cycling</p>
+      </div>
+    </div>
+    <h3 class="text-[#0e1b16] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Extras</h3>
+    <div class="p-4">
+      <div class="flex items-stretch justify-between gap-4 rounded-xl bg-[#f8fcfa] p-4 shadow-[0_0_4px_rgba(0,0,0,0.1)]">
+        <div class="flex flex-col gap-1 flex-[2_2_0px]">
+          <p class="text-[#0e1b16] text-base font-bold leading-tight">BMI Score: 22.5</p>
+          <p class="text-[#4e977e] text-sm font-normal leading-normal">Healthy weight range. Keep up the good work!</p>
+        </div>
+        <div
+          class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl flex-1"
+          style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKXkIhuxXCEz8htt_UNZJlbIwyzH9ZaN3Bp5wbZ0beGG5mMWgKqBl9J-76W9AR6nBpnmE1zea0wCg75Zv6Ie2-EtbR-ttaUZYiVyXXMs1ZPeMaQMG1II3dJqhpnBndGsrphXQN0Hh0WcjfAOq_hdeJmTPJCibnhKujwve0nPO2gVzEaOew-X6Loo_s_AOccPbHTX8VNY36PyxpvNd_9Fy24Ilhh1EvPqv_DMtJeE97OL9MTclIr2E7g674EtJ4SKSNN3HUI687dt4");'
+        ></div>
+      </div>
+    </div>
+    <div class="p-4">
+      <div class="flex items-stretch justify-between gap-4 rounded-xl bg-[#f8fcfa] p-4 shadow-[0_0_4px_rgba(0,0,0,0.1)]">
+        <div class="flex flex-col gap-1 flex-[2_2_0px]">
+          <p class="text-[#0e1b16] text-base font-bold leading-tight">Wellness Tip of the Day</p>
+          <p class="text-[#4e977e] text-sm font-normal leading-normal">Stay hydrated! Drink at least 8 glasses of water to maintain optimal health.</p>
+        </div>
+        <div
+          class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl flex-1"
+          style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBcRhrrDyVxr1VhZPMwd2cX9BPtUGrE2Dpb2_aOFogPLvBp8ESZ1oF0nX9d702Rys4L7bPEgHOOvPJ5c4t4DNzjiMHl-BANUVcSQlwp4MLnkqjkLMQpdPDekv533Fs5kfRVn7XlL8M63rwZUzVdFPaNqcNy-7cdRrFGzpZ3AKNNVPY2hjgmI2gK1vHxrjgAftpZlYZp_AsXX9g8guWL6-97Ev5x6hRMzDjlN4m6gouX0b5TPkRJWN4NTWey5WPjwkuC8CrboqYf9iI");'
+        ></div>
+      </div>
+    </div>
+    <div class="flex p-4 @container">
+      <div class="flex w-full flex-col gap-4 @[520px]:flex-row @[520px]:justify-between @[520px]:items-center">
+        <div class="flex gap-4">
+          <div
+            class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
+            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAlUjHwd667mIYwqADpFR5277iqOCcjCuYaBHGsYYxpFXBWcOvhNB-MuVWidAdmYlWs3RAkvksilETVfhuBvLVogowjPeeE5MVZALL7FY80QgJw70iXICCH5NTqMY9MOzWGTpJO6Iw-PX1-qEiL982u6cTrGg17IgWRBe_2LKgtPB_KkRWS2m-EXo-eAor7IlioYbxpv_tz8vqUVn-erNg1MUTX7zUNXwKb--tPLQI70ZRGX5SmQwfpCRhKegy36cCGOuVyJ_JK7Jg");'
+          ></div>
+          <div class="flex flex-col justify-center">
+            <p class="text-[#0e1b16] text-[22px] font-bold leading-tight tracking-[-0.015em]">Olivia Carter</p>
+            <p class="text-[#4e977e] text-base font-normal leading-normal">Fitness Enthusiast</p>
+          </div>
         </div>
       </div>
     </div>
-
-    <hr class="border-secondary">
-
-    <div class="text-center py-2 small">
-      &copy; {{ now|date:"Y" }} Trackr. All rights reserved.
-    </div>
   </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+{% endblock content %}
