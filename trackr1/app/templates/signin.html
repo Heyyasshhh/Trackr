@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Sign In{% endblock title %}
+
+{% block content %}
+<div class="px-4 md:px-40 flex flex-1 justify-center py-5">
+  <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5">
+    <h2 class="text-[#141613] text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">Sign In</h2>
+
+    {% if messages %}
+    <div class="px-4">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm px-4 py-3 rounded-3 animate__animated animate__fadeInDown"
+        role="alert"
+        style="border-left: 5px solid 
+        {% if message.tags == 'success' %}#28a745
+        {% elif message.tags == 'error' %}#dc3545
+        {% elif message.tags == 'warning' %}#ffc107
+        {% else %}#17a2b8{% endif %};">
+        <strong class="text-capitalize">{{ message.tags }}:</strong> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST" class="w-full">
+      {% csrf_token %}
+
+      <!-- Email -->
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+        <label class="flex flex-col min-w-40 flex-1">
+          <input
+            type="email"
+            name="uemail"
+            id="uemail"
+            placeholder="Email"
+            required
+            class="form-input flex w-full resize-none overflow-hidden rounded-xl text-[#141613] border border-[#daded8] bg-stone-50 h-14 placeholder:text-[#6f7c6a] p-[15px] text-base font-normal leading-normal"
+          />
+        </label>
+      </div>
+
+      <!-- Password -->
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+        <label class="flex flex-col min-w-40 flex-1">
+          <input
+            type="password"
+            name="upass"
+            id="upass"
+            placeholder="Password"
+            required
+            class="form-input flex w-full resize-none overflow-hidden rounded-xl text-[#141613] border border-[#daded8] bg-stone-50 h-14 placeholder:text-[#6f7c6a] p-[15px] text-base font-normal leading-normal"
+          />
+        </label>
+      </div>
+
+      <!-- Forgot Password -->
+      <div class="px-4 text-right text-sm text-[#6f7c6a] underline">
+        <a href="{% url 'request_password' %}">Forgot Password?</a>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex px-4 py-4">
+        <button type="submit"
+          class="w-full bg-[#769966] hover:bg-[#5e7d50] text-white py-3 px-6 rounded-full text-sm font-bold tracking-wide">
+          <span class="truncate">Sign In</span>
+        </button>
+      </div>
+
+      <!-- Divider -->
+      <hr class="mx-4 my-2 border-[#daded8]">
+
+      <!-- Social Logins -->
+      <div class="flex flex-col gap-3 px-4">
+        <button
+          type="button"
+          class="border border-[#daded8] text-[#141613] font-medium py-2 rounded-xl hover:bg-stone-100 flex items-center justify-center gap-2"
+        >
+          <i class="fab fa-google text-red-500"></i> Continue with Google
+        </button>
+        <button
+          type="button"
+          class="border border-[#daded8] text-[#141613] font-medium py-2 rounded-xl hover:bg-stone-100 flex items-center justify-center gap-2"
+        >
+          <i class="fab fa-facebook-f text-blue-600"></i> Continue with Facebook
+        </button>
+      </div>
+
+      <!-- Sign up link -->
+      <p class="text-[#6f7c6a] text-sm font-normal leading-normal pb-3 pt-5 px-4 text-center underline">
+        Don’t have an account? <a href="{% url 'signup' %}">Sign up here</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- Optional: Auto close alert -->
+<script>
+  setTimeout(() => {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => {
+      bootstrap.Alert.getOrCreateInstance(alert).close();
+    });
+  }, 5000);
+</script>
+{% endblock content %}

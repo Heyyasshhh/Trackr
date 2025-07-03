@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  /* Input & select fields */
+  .form-control,
+  .form-select,
+  textarea {
+    background-color: #f8f9fa !important;
+    border: 1px solid #ced4da !important;
+    color: #212529 !important;
+    font-weight: 500;
+    box-shadow: none;
+  }
+
+  /* Placeholder styling */
+  .form-control::placeholder,
+  textarea::placeholder {
+    color: #999 !important;
+    font-weight: 400;
+  }
+
+  /* On focus */
+  .form-control:focus,
+  .form-select:focus,
+  textarea:focus {
+    border-color: #86d6bc !important;
+    box-shadow: 0 0 0 3px rgba(179, 228, 211, 0.4) !important;
+    background-color: #fff !important;
+    color: #212529;
+  }
+
+  /* Readonly fields (e.g., email) */
+  .form-control[readonly] {
+    background-color: #e9ecef !important;
+    color: #6c757d !important;
+  }
+
+  /* Disabled select (goal) */
+  select[disabled] {
+    background-color: #e9ecef !important;
+    color: #6c757d !important;
+  }
+
+  /* Labels */
+  .form-label {
+    font-weight: 600;
+    color: #343a40;
+  }
+</style>
+
+<form method="post" enctype="multipart/form-data" class="container py-5" style="max-width: 720px; font-family: 'Lexend', 'Noto Sans', sans-serif;">
+  {% csrf_token %}
+  <h2 class="text-center fw-bold mb-4">Tell us about yourself</h2>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+      <label class="form-label">First Name</label>
+      <input type="text" name="first_name" class="form-control rounded-pill bg-light border-0 px-4 py-3" placeholder="Emma">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Last Name</label>
+      <input type="text" name="last_name" class="form-control rounded-pill bg-light border-0 px-4 py-3" placeholder="Bennett">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Height (cm)</label>
+      <input type="number" name="height" class="form-control rounded-pill bg-light border-0 px-4 py-3" placeholder="170">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Weight (kg)</label>
+      <input type="number" name="weight" class="form-control rounded-pill bg-light border-0 px-4 py-3" placeholder="65">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Gender</label>
+      <select name="gender" class="form-select rounded-pill bg-light border-0 px-4 py-3">
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Dietary Preference</label>
+      <select name="dietary_preference" class="form-select rounded-pill bg-light border-0 px-4 py-3">
+        <option value="">Select Preference</option>
+        <option value="Vegetarian">Vegetarian</option>
+        <option value="Non-Vegetarian">Non-Vegetarian</option>
+        <option value="Vegan">Vegan</option>
+        <option value="Keto">Keto</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Activity Level</label>
+      <select name="activity_level" class="form-select rounded-pill bg-light border-0 px-4 py-3">
+        <option value="">Select Activity</option>
+        <option value="Sedentary">Sedentary (little or no exercise)</option>
+        <option value="Lightly active">Lightly active (1-3 days/week)</option>
+        <option value="Moderately active">Moderately active (3-5 days/week)</option>
+        <option value="Very active">Very active (6-7 days/week)</option>
+        <option value="Extra active">Extra active (physical job + training)</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Target Weight</label>
+      <input type="number" name="target_weight" class="form-control rounded-pill bg-light border-0 px-4 py-3" placeholder="60">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Goal</label>
+      <select name="goal" class="form-select rounded-pill bg-light border-0 px-4 py-3 bg-secondary-subtle text-muted" readonly disabled>
+        <option value="Lose Weight">Lose Weight</option>
+        <option value="Maintain Weight">Maintain Weight</option>
+        <option value="Gain Muscle">Gain Muscle</option>
+      </select>
+      <input type="hidden" name="goal" id="hidden-goal">
+    </div>
+
+
+    <div class="col-md-6">
+      <label class="form-label">Profile Picture</label>
+      <input type="file" name="photo" class="form-control rounded-pill bg-light border-0 px-4 py-3">
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">Medical Conditions</label>
+      <textarea name="medical_conditions" class="form-control rounded-4 bg-light border-0 px-4 py-3" rows="2"></textarea>
+    </div>
+    <div class="col-12">
+      <label class="form-label">Allergies</label>
+      <textarea name="allergies" class="form-control rounded-4 bg-light border-0 px-4 py-3" rows="2"></textarea>
+    </div>
+    <div class="col-12">
+      <label class="form-label">Medications</label>
+      <textarea name="medications" class="form-control rounded-4 bg-light border-0 px-4 py-3" rows="2"></textarea>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Mobile Number</label>
+      <input type="number" name="mobile" class="form-control rounded-pill bg-light border-0 px-4 py-3" placeholder="Enter Number">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Email</label>
+      <input type="email" name="email" class="form-control rounded-pill bg-light border-0 px-4 py-3 text-muted" value="{{ user_email }}" readonly>
+    </div>
+
+    <div class="col-12 d-flex justify-content-between pt-4">
+      <button type="submit" class="btn px-4 py-2 fw-bold text-dark" style="background-color: #b3e4d3; border-radius: 999px;">Submit</button>
+      <button type="button" class="btn btn-outline-secondary px-4 py-2 fw-bold rounded-pill">Skip for Now</button>
+    </div>
+  </div>
+</form>
+<script>
+  const weightInput = document.querySelector('input[name="weight"]');
+  const targetWeightInput = document.querySelector('input[name="target_weight"]');
+  const goalSelect = document.querySelector('select[name="goal"]');
+
+  function autoSetGoal() {
+    const weight = parseFloat(weightInput.value);
+    const target_weight = parseFloat(target_weightInput.value);
+
+    if (!isNaN(weight) && !isNaN(target_weight)) {
+      if (target_weight > weight) {
+        goalSelect.value = 'Gain Muscle';
+      } else if (target_weight < weight) {
+        goalSelect.value = 'Lose Weight';
+      } else {
+        goalSelect.value = 'Maintain Weight';
+      }
+    }
+  }
+
+  weightInput.addEventListener('input', autoSetGoal);
+  target_weightInput.addEventListener('input', autoSetGoal);
+</script>
+
+{% endblock content %}

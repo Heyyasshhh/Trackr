@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Sign In{% endblock title %}
+
+{% block content %}
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <!-- Profile Header -->
+      <div class="mb-4 text-center">
+        <div class="rounded-circle mx-auto mb-3" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBzPDlx7tkLVdOJ9AYkTXoAR0S0jWrsLaopIwqUIoFxxLGRCd2NJe3Bm8qKrAPxPKs2Ngcpti3t-uefnMX0WdopqkO3yGvenPDWhMjVBQL-07Ll0Uly8fq-lZySHp8_mEeKyPtVGCxPP_rKC0IjKUyzXLKXv7ZJMam_YVxyae5OQ78nL-1hpJ9cO6dZh9AwU51WWhGZ_2kWV-OVJbmgwrEnUPgNjxWfbBQWXJAbEoLNZrP9riwLlRNo7M74ZdE6MdeWs8LFKRoGPlw'); background-size: cover; background-position: center; height: 128px; width: 128px;"></div>
+        <h3 class="fw-bold mb-0 text-dark">Sophia Carter</h3>
+        <p class="text-muted">sophia.carter@email.com</p>
+      </div>
+
+      <!-- Personal Info -->
+      <h5 class="fw-bold text-dark mb-3">Personal Information</h5>
+      <form>
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-control rounded-4 px-3 py-2 bg-light border" placeholder="First name">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-control rounded-4 px-3 py-2 bg-light border" placeholder="Last name">
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Gender</label>
+            <select class="form-select rounded-4 px-3 py-2 bg-light border">
+              <option selected disabled>Select Gender</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Age</label>
+            <input type="number" class="form-control rounded-4 px-3 py-2 bg-light border" placeholder="Enter age">
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Date of Birth</label>
+            <input type="date" class="form-control rounded-4 px-3 py-2 bg-light border">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Phone Number</label>
+            <input type="text" class="form-control rounded-4 px-3 py-2 bg-light border" placeholder="Phone number">
+          </div>
+        </div>
+
+        <!-- Save Button -->
+        <div class="text-end mt-4">
+          <button type="submit" class="btn px-4 py-2 rounded-pill fw-bold text-dark" style="background-color: #b3e4d3;">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+<div class="px-4 md:px-40 flex flex-1 justify-center py-5">
+  <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5">
+    <h2 class="text-[#141613] text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">Create your account</h2>
+
+    {% if messages %}
+    <div class="px-4">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm px-4 py-3 rounded-3 animate__animated animate__fadeInDown"
+        role="alert"
+        style="border-left: 5px solid 
+        {% if message.tags == 'success' %}#28a745
+        {% elif message.tags == 'error' %}#dc3545
+        {% elif message.tags == 'warning' %}#ffc107
+        {% else %}#17a2b8{% endif %};">
+        <strong class="text-capitalize">{{ message.tags }}:</strong> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST" class="w-full">
+      {% csrf_token %}
+
+      <!-- Full Name -->
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+        <label class="flex flex-col min-w-40 flex-1">
+          <input
+            type="text"
+            name="uname"
+            id="uname"
+            placeholder="Full Name"
+            required
+            class="form-input flex w-full resize-none overflow-hidden rounded-xl text-[#141613] border border-[#daded8] bg-stone-50 h-14 placeholder:text-[#6f7c6a] p-[15px] text-base font-normal leading-normal"
+          />
+        </label>
+      </div>
+
+      <!-- Email -->
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+        <label class="flex flex-col min-w-40 flex-1">
+          <input
+            type="email"
+            name="uemail"
+            id="uemail"
+            placeholder="Email"
+            required
+            class="form-input flex w-full resize-none overflow-hidden rounded-xl text-[#141613] border border-[#daded8] bg-stone-50 h-14 placeholder:text-[#6f7c6a] p-[15px] text-base font-normal leading-normal"
+          />
+        </label>
+      </div>
+
+      <!-- Password -->
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+        <label class="flex flex-col min-w-40 flex-1">
+          <input
+            type="password"
+            name="upass"
+            id="upass"
+            placeholder="Password"
+            required
+            class="form-input flex w-full resize-none overflow-hidden rounded-xl text-[#141613] border border-[#daded8] bg-stone-50 h-14 placeholder:text-[#6f7c6a] p-[15px] text-base font-normal leading-normal"
+          />
+          <div id="passwordHelp" class="form-text text-danger mt-1 text-sm"></div>
+        </label>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+        <label class="flex flex-col min-w-40 flex-1">
+          <input
+            type="password"
+            name="ucpass"
+            id="ucpass"
+            placeholder="Confirm Password"
+            required
+            class="form-input flex w-full resize-none overflow-hidden rounded-xl text-[#141613] border border-[#daded8] bg-stone-50 h-14 placeholder:text-[#6f7c6a] p-[15px] text-base font-normal leading-normal"
+          />
+          <div id="confirmHelp" class="form-text text-danger mt-1 text-sm"></div>
+        </label>
+      </div>
+
+      <!-- Terms -->
+      <div class="flex px-4 pt-1">
+        <div class="form-check mb-3 text-sm">
+          <input class="form-check-input me-2" type="checkbox" id="agreeTerms" required />
+          <label class="form-check-label" for="agreeTerms">
+            I agree to the <a href="{% url "terms" %}" class="underline">Terms & Conditions</a>
+          </label>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex px-4 py-3">
+        <button
+          type="submit"
+          class="w-full bg-[#769966] hover:bg-[#5e7d50] text-white py-3 px-6 rounded-full text-sm font-bold tracking-wide"
+        >
+          <span class="truncate">Sign Up</span>
+        </button>
+      </div>
+
+      <!-- Already have an account -->
+      <p class="text-[#6f7c6a] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center underline">
+        Already have an account? <a href="{% url 'signin' %}">Log in</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+<script>
+  const password = document.getElementById('upass');
+  const confirmPassword = document.getElementById('ucpass');
+  const passwordHelp = document.getElementById('passwordHelp');
+  const confirmHelp = document.getElementById('confirmHelp');
+  const submitBtn = document.querySelector('button[type="submit"]');
+
+  let passwordTouched = false;
+  let confirmTouched = false;
+
+  function validatePassword() {
+    const val = password.value;
+    let messages = [];
+
+    if (val.length < 8) messages.push("At least 8 characters");
+    if (!/[A-Z]/.test(val)) messages.push("One uppercase letter");
+    if (!/[a-z]/.test(val)) messages.push("One lowercase letter");
+    if (!/[0-9]/.test(val)) messages.push("One number");
+    if (!/[!@#$%^&*]/.test(val)) messages.push("One special character (!@#$%^&*)");
+
+    if (passwordTouched) {
+      if (messages.length > 0) {
+        passwordHelp.innerHTML = "⚠ " + messages.join(", ");
+      } else {
+        passwordHelp.innerHTML = "<span class='text-success'>✅ Strong password</span>";
+      }
+    }
+
+    return messages.length === 0;
+  }
+
+  function checkMatch() {
+    const isMatch = password.value === confirmPassword.value;
+
+    if (confirmTouched) {
+      if (!isMatch) {
+        confirmHelp.innerText = "Passwords do not match";
+      } else {
+        confirmHelp.innerHTML = "<span class='text-success'>✅ Passwords match</span>";
+      }
+    }
+
+    return isMatch;
+  }
+
+  function toggleSubmit() {
+    submitBtn.disabled = !(validatePassword() && checkMatch());
+  }
+
+  password.addEventListener('input', () => {
+    passwordTouched = true;
+    validatePassword();
+    checkMatch();
+    toggleSubmit();
+  });
+
+  confirmPassword.addEventListener('input', () => {
+    confirmTouched = true;
+    checkMatch();
+    toggleSubmit();
+  });
+
+  // Auto-close alerts after 5 seconds
+  setTimeout(() => {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => {
+      bootstrap.Alert.getOrCreateInstance(alert).close();
+    });
+  }, 5000);
+
+  submitBtn.disabled = true;
+</script>
+
+{% endblock content %}

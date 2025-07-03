@@ -1,0 +1,58 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f8;
+    color: #34495e;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #1abc9c;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+.btn-primary:hover {
+    background-color: #16a085;
+}
+
+/* Card Style */
+.card {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    padding: 1.5rem;
+}
+
+/* Inputs */
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    transition: 0.3s;
+}
+.form-control:focus {
+    border-color: #1abc9c;
+    box-shadow: 0 0 0 0.2rem rgba(26, 188, 156, 0.25);
+}
+
+/* Navbar */
+.navbar {
+    background-color: #fff;
+    border-bottom: 1px solid #e1e4e8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+a {
+    text-decoration: none;
+    color: #1abc9c;
+}
+a:hover {
+    text-decoration: underline;
+}

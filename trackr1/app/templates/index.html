@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Trackr {% endblock title %}
+{% block content %}
+<div class="px-4 md:px-40 flex flex-1 justify-center py-5">
+  <div class="layout-content-container flex flex-col max-w-[960px] w-full">
+    <div class="@container">
+      <div class="@[480px]:p-4">
+        <div
+          class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
+          style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuA3VMSI8_MTq-o5XdNGbdEL8-PhyNq5t7RhMCFiF9m0YygTx2dDgFfZ4iaykO1z9Wo_4qP_knNIQRDym92jajdtykEWyka56D3Gvuk33EbQQE27v3V7akUuTUuewE_Fb0E4RC3Fn8s0vlaveqcTBrdpAQRIbU0GcQkajDeZASOdeMaLvCN3dzeywQxOMq_HiwYzqKaEnFp71bQmjFJIF28UrzeVJo7p26PIAYLKE6rj8k3-fTxAQl64S8yZHTekbrrQrQfinfI7iO8");'
+        >
+          <div class="flex flex-col gap-2 text-center max-w-2xl">
+            <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl">
+              Track Your Health, Achieve Your Goals
+            </h1>
+            <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base">
+              Monitor your fitness journey with HealthTrack. Log workouts, track nutrition, and visualize your progress.
+            </h2>
+          </div>
+          <div class="flex flex-wrap gap-3 justify-center">
+            <a
+              href="{% url 'signup' %}"
+              class="flex min-w-[84px] max-w-[480px] items-center justify-center rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#769966] text-[#141613] text-sm font-bold @[480px]:text-base transition hover:opacity-90"
+            >
+              <span class="truncate">Sign Up</span>
+            </a>
+            <a
+              href="#"
+              class="flex min-w-[84px] max-w-[480px] items-center justify-center rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#edefec] text-[#141613] text-sm font-bold @[480px]:text-base transition hover:opacity-90"
+            >
+              <span class="truncate">Learn More</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-10 px-4 py-10 @container">
+      <div class="flex flex-col gap-4 text-center max-w-2xl mx-auto">
+        <h1 class="text-[#141613] text-[32px] font-bold leading-tight @[480px]:text-4xl">
+          Key Features
+        </h1>
+        <p class="text-[#141613] text-base font-normal">
+          HealthTrack offers a comprehensive suite of tools to help you stay on top of your health and fitness.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
+        <!-- Feature 1 -->
+        <div class="flex flex-col gap-3 rounded-lg border border-[#daded8] bg-stone-50 p-4">
+          <div class="text-[#141613]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.61,146.24,196.15,128,206.8Z" />
+            </svg>
+          </div>
+          <div class="flex flex-col gap-1">
+            <h2 class="text-[#141613] text-base font-bold">Activity Tracking</h2>
+            <p class="text-[#6f7c6a] text-sm">Automatically track your daily steps, distance, and active minutes.</p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="flex flex-col gap-3 rounded-lg border border-[#daded8] bg-stone-50 p-4">
+          <div class="text-[#141613]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M248,120h-8V88a16,16,0,0,0-16-16H208V64a16,16,0,0,0-16-16H168a16,16,0,0,0-16,16v56H104V64A16,16,0,0,0,88,48H64A16,16,0,0,0,48,64v8H32A16,16,0,0,0,16,88v32H8a8,8,0,0,0,0,16h8v32a16,16,0,0,0,16,16H48v8a16,16,0,0,0,16,16H88a16,16,0,0,0,16-16V136h48v56a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16v-8h16a16,16,0,0,0,16-16V136h8a8,8,0,0,0,0-16ZM32,168V88H48v80Zm56,24H64V64H88V192Zm104,0H168V64h24V175.82c0,.06,0,.12,0,.18s0,.12,0,.18V192Zm32-24H208V88h16Z" />
+            </svg>
+          </div>
+          <div class="flex flex-col gap-1">
+            <h2 class="text-[#141613] text-base font-bold">Workout Logging</h2>
+            <p class="text-[#6f7c6a] text-sm">Easily log your workouts, including type, duration, and calories burned.</p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="flex flex-col gap-3 rounded-lg border border-[#daded8] bg-stone-50 p-4">
+          <div class="text-[#141613]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M180,144H160V112h20a36,36,0,1,0-36-36V96H112V76a36,36,0,1,0-36,36H96v32H76a36,36,0,1,0,36,36V160h32v20a36,36,0,1,0,36-36ZM160,76a20,20,0,1,1,20,20H160ZM56,76a20,20,0,0,1,40,0V96H76A20,20,0,0,1,56,76ZM96,180a20,20,0,1,1-20-20H96Zm16-68h32v32H112Zm68,88a20,20,0,0,1-20-20V160h20a20,20,0,0,1,0,40Z" />
+            </svg>
+          </div>
+          <div class="flex flex-col gap-1">
+            <h2 class="text-[#141613] text-base font-bold">Nutrition Monitoring</h2>
+            <p class="text-[#6f7c6a] text-sm">Monitor your daily calorie intake, macronutrient breakdown, and hydration levels.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="@container">
+      <div class="flex flex-col justify-end gap-6 px-4 py-10 @[480px]:gap-8 @[480px]:px-10 @[480px]:py-20 text-center max-w-2xl mx-auto">
+        <h1 class="text-[#141613] text-[32px] font-bold @[480px]:text-4xl">Ready to Transform Your Health?</h1>
+        <p class="text-[#141613] text-base font-normal">
+          Join HealthTrack today and start your journey towards a healthier, happier you.
+        </p>
+        <div class="flex justify-center">
+          <a
+            href="{% url 'signup' %}"
+            class="flex min-w-[84px] max-w-[480px] items-center justify-center rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#769966] text-[#141613] text-sm font-bold transition hover:opacity-90"
+          >
+            <span class="truncate">Get Started</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

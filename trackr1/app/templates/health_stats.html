@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Health Stats {% endblock title %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <h2 class="fw-bold text-dark mb-4">Add Health Stats</h2>
+
+      <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label for="calories" class="form-label fw-medium">Calories (kcal)</label>
+          <input type="number" step="1" class="form-control form-control-lg bg-light border-0" name="calories" id="calories" placeholder="Enter calories consumed" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="water" class="form-label fw-medium">Water Intake (liters)</label>
+          <input type="number" step="0.1" class="form-control form-control-lg bg-light border-0" name="water" id="water" placeholder="Enter water intake" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="steps" class="form-label fw-medium">Steps</label>
+          <input type="number" step="1" class="form-control form-control-lg bg-light border-0" name="steps" id="steps" placeholder="Enter number of steps" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="sleep" class="form-label fw-medium">Sleep Duration (hours)</label>
+          <input type="number" step="0.1" class="form-control form-control-lg bg-light border-0" name="sleep" id="sleep" placeholder="Enter hours of sleep" required>
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-success btn-lg rounded-pill fw-bold">
+            Save Stats
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

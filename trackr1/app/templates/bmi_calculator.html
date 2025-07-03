@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} BMI Calculator {% endblock title %}
+{% block content %}
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+
+      <!-- Heading -->
+      <div class="d-flex justify-content-between align-items-center px-3 mb-4">
+        <h2 class="fw-bold text-dark display-6">BMI Calculator</h2>
+      </div>
+
+      <!-- BMI Form -->
+      <form onsubmit="calculateBMI(event)" class="row g-3 px-3 mb-4">
+        <div class="col-md-6">
+          <label class="form-label fw-medium">Height (cm)</label>
+          <input type="number" step="0.1" id="height" class="form-control rounded-pill" required value="{{ height|default_if_none:'' }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-medium">Weight (kg)</label>
+          <input type="number" step="0.1" id="weight" class="form-control rounded-pill" required value="{{ weight|default_if_none:'' }}">
+        </div>
+        <div class="col-12 text-end">
+          <button type="submit" class="btn btn-success rounded-pill px-4">Calculate</button>
+        </div>
+      </form>
+
+      <!-- BMI Result Section -->
+      <div id="bmi-result" class="row g-4 p-3 d-none">
+        <div class="col-md-4">
+          <div class="card bg-light border-0 shadow-sm p-3">
+            <p class="text-dark mb-1 fw-medium">Your BMI</p>
+            <h3 class="fw-bold text-dark" id="bmi-value"></h3>
+          </div>
+        </div>
+        <div class="col-12 mt-2 px-3">
+          <p class="text-dark" id="bmi-message"></p>
+        </div>
+      </div>
+
+      <!-- BMI Range Table -->
+      <h4 class="fw-bold text-dark px-3 pt-4">BMI Range</h4>
+      <div class="px-3 py-3">
+        <div class="table-responsive rounded border bg-light">
+          <table class="table mb-0">
+            <thead class="table-light">
+              <tr>
+                <th scope="col" class="text-dark">Range</th>
+                <th scope="col" class="text-dark">Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Below 18.5</td><td>Underweight</td></tr>
+              <tr><td>18.5 - 24.9</td><td>Healthy Weight</td></tr>
+              <tr><td>25.0 - 29.9</td><td>Overweight</td></tr>
+              <tr><td>30.0 and Above</td><td>Obese</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- BMI Calculation Script -->
+<script>
+  function calculateBMI(event) {
+    event.preventDefault();
+
+    const height = parseFloat(document.getElementById("height").value);
+    const weight = parseFloat(document.getElementById("weight").value);
+    const resultSection = document.getElementById("bmi-result");
+    const bmiValue = document.getElementById("bmi-value");
+    const bmiMessage = document.getElementById("bmi-message");
+
+    if (height > 0 && weight > 0) {
+      const height_m = height / 100;
+      const bmi = (weight / (height_m * height_m)).toFixed(1);
+      bmiValue.innerText = bmi;
+
+      let message = "";
+      if (bmi < 18.5) {
+        message = "🟡 Underweight – Consider consulting a health expert for proper guidance.";
+      } else if (bmi >= 18.5 && bmi <= 24.9) {
+        message = "🟢 Healthy Weight – Keep it up with your balanced lifestyle!";
+      } else if (bmi >= 25.0 && bmi <= 29.9) {
+        message = "🟠 Overweight – Regular exercise and a healthy diet can help.";
+      } else {
+        message = "🔴 Obese – It's advisable to consult a healthcare provider.";
+      }
+
+      bmiMessage.innerText = message;
+      resultSection.classList.remove("d-none");
+    } else {
+      alert("Please enter valid height and weight.");
+    }
+  }
+</script>
+
+{% endblock content %}

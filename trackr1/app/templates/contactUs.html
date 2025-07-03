@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Contact Us {% endblock title %}
+{% block content %}
+<div class="container py-5 d-flex justify-content-center">
+  <div class="w-100" style="max-width: 512px;">
+    
+    <!-- Header -->
+    <div class="p-4">
+      <div class="d-flex flex-column gap-3">
+        <h1 class="text-dark fw-bold display-6 mb-2">Contact Us</h1>
+        <p class="text-muted small mb-0">
+          We're here to help! Reach out to us with any questions, feedback, or concerns you may have.
+          Our team is dedicated to providing you with the support you need to make the most of your fitness journey.
+        </p>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <form>
+      <!-- Name -->
+      <div class="px-4 py-3">
+        <label class="form-label text-dark fw-medium pb-1">Your Name</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your name"
+          style="height: 56px; border-radius: 1rem; background-color: #f9fbfa; border: 1px solid #d5e2dd; color: #111816;"
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="px-4 py-3">
+        <label class="form-label text-dark fw-medium pb-1">Your Email</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Enter your email"
+          style="height: 56px; border-radius: 1rem; background-color: #f9fbfa; border: 1px solid #d5e2dd; color: #111816;"
+        />
+      </div>
+
+      <!-- Subject -->
+      <div class="px-4 py-3">
+        <label class="form-label text-dark fw-medium pb-1">Subject</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter the subject"
+          style="height: 56px; border-radius: 1rem; background-color: #f9fbfa; border: 1px solid #d5e2dd; color: #111816;"
+        />
+      </div>
+
+      <!-- Message -->
+      <div class="px-4 py-3">
+        <label class="form-label text-dark fw-medium pb-1">Message</label>
+        <textarea
+          class="form-control"
+          placeholder="Enter your message"
+          style="min-height: 9rem; border-radius: 1rem; background-color: #f9fbfa; border: 1px solid #d5e2dd; color: #111816;"
+        ></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="px-4 py-3 text-end">
+        <button
+          type="submit"
+          class="btn fw-bold"
+          style="background-color: #b3e4d3; color: #111816; border-radius: 9999px; padding: 0.5rem 1.5rem; min-width: 100px;"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}

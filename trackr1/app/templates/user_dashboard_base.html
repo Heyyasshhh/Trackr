@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid py-5">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="mx-auto" style="max-width: 960px;">
+    <div class="d-flex flex-wrap justify-content-between gap-3 p-4">
+      <p class="text-dark fw-bold fs-2" style="min-width: 18rem;">Dashboard</p>
+    </div>
+
+    <!-- Personal Stats Section -->
+    <h3 class="text-dark fw-bold px-4 pt-4 pb-2">
+      Personal Stats<button type="button" class="border-0 bg-transparent p-0 ms-2" data-bs-toggle="modal" data-bs-target="#editStatsModal" title="Edit">✍</button>
+    </h3>
+    <div class="row px-4 g-4 mb-4">
+      <div class="col-md border rounded shadow-sm p-4 bg-white">
+        <p class="fw-medium">📏 Height</p>
+        <p class="fw-bold fs-4">{{ profile.height|default:"--" }} cm</p>
+      </div>
+      <div class="col-md border rounded shadow-sm p-4 bg-white">
+        <p class="fw-medium">⚖️ Weight</p>
+        <p class="fw-bold fs-4">{{ profile.weight|default:"--" }} kg</p>
+        <p class="fw-medium text-muted small">🎯 Target: {{ profile.target_weight|default:"--" }} kg</p>
+      </div>
+    </div>
+
+    <!-- Edit Personal Stats Modal -->
+    <div class="modal fade" id="editStatsModal" tabindex="-1" aria-labelledby="editStatsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+          <form method="POST" action="{% url 'edit_personal_stats' %}">
+            {% csrf_token %}
+            <div class="modal-header border-0 pb-0">
+              <h5 class="modal-title fw-bold" id="editStatsModalLabel">Edit Personal Stats</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body row g-4 py-3 px-4">
+              <div class="col-md-12">
+                <label class="form-label">Height (cm)</label>
+                <input type="number" name="height" value="{{ profile.height }}" class="form-control rounded-pill px-3">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Current Weight (kg)</label>
+                <input type="number" name="weight" value="{{ profile.weight }}" class="form-control rounded-pill px-3">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Target Weight (kg)</label>
+                <input type="number" name="target_weight" value="{{ profile.target_weight }}" class="form-control rounded-pill px-3">
+              </div>
+            </div>
+            <div class="modal-footer border-0 px-4 pb-4">
+              <button type="submit" class="btn btn-success rounded-pill px-4 fw-semibold">Save Stats</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="d-flex justify-content-between align-items-center px-4 pt-4 pb-2">
+      <h3 class="text-dark fw-bold">Daily Log</h3>
+      <button class="btn btn-outline-success rounded-pill px-4 fw-semibold" data-bs-toggle="modal" data-bs-target="#setTargetModal">
+        🎯 Set Daily Target
+      </button>
+    </div>
+
+    <!-- Daily Log Section -->
+    <div class="row px-4 g-4 mb-4">
+      <div class="col-md border rounded shadow-sm p-4 bg-white">
+        <p class="fw-medium">🥣 Calories</p>
+        <p class="fw-bold fs-4">
+          {{ today_log.calories|default:"--" }} / {{ profile.daily_calories|default:"--" }} kcal
+        </p>
+      </div>
+      <div class="col-md border rounded shadow-sm p-4 bg-white">
+        <p class="fw-medium">🧊 Water Intake</p>
+        <p class="fw-bold fs-4">
+          {{ today_log.water_intake|default:"--" }} / {{ profile.daily_water|default:"--" }} L
+        </p>
+      </div>
+      <div class="col-md border rounded shadow-sm p-4 bg-white">
+        <p class="fw-medium">👣 Steps</p>
+        <p class="fw-bold fs-4">
+          {{ today_log.steps|default:"--" }} / {{ profile.daily_steps|default:"--" }}
+        </p>
+      </div>
+      <div class="col-md border rounded shadow-sm p-4 bg-white">
+        <p class="fw-medium">🛌 Sleep</p>
+        <p class="fw-bold fs-4">
+          {{ today_log.sleep_hours|default:"--" }} / {{ profile.sleep_hours|default:"--" }} hrs
+        </p>
+      </div>
+    </div>
+
+    <div class="modal fade" id="setTargetModal" tabindex="-1" aria-labelledby="setTargetModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+          <form method="POST" action="{% url 'set_daily_target' %}">
+            {% csrf_token %}
+            <div class="modal-header border-0 pb-0">
+              <h5 class="modal-title fw-bold" id="setTargetModalLabel">Set Daily Target</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body Start -->
+            <div class="modal-body row g-4 py-3 px-4">
+              <div class="col-md-6">
+                <label class="form-label">Calories (kcal)</label>
+                <input type="number" name="daily_calories" value="{{ profile.daily_calories }}" class="form-control rounded-pill px-3" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Water (liters)</label>
+                <input type="text" name="daily_water" value="{{ profile.daily_water }}" class="form-control rounded-pill px-3" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Steps</label>
+                <input type="number" name="daily_steps" value="{{ profile.daily_steps }}" class="form-control rounded-pill px-3" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Sleep (Hours)</label>
+                <input type="number" name="daily_sleep" value="{{ profile.daily_sleep }}" class="form-control rounded-pill px-3" required>
+              </div>
+            </div>
+            <!-- Modal Body End -->
+
+            <div class="modal-footer border-0 px-4 pb-4">
+              <button type="submit" class="btn btn-success rounded-pill px-4 fw-semibold">Save Target</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    
+    
+    <!-- Quick Actions -->
+<h3 class="text-dark fw-bold px-4 pt-4 pb-2">Quick Actions</h3>
+<div class="d-flex justify-content-center">
+  <div class="d-flex flex-row flex-wrap gap-3 px-4 py-3 justify-content-center" style="max-width: 100%;">
+    <a href="{% url 'bmi_calculator' %}" class="btn btn-outline-dark rounded-pill px-4 fw-bold text-decoration-none">BMI Calculator</a>
+    <a href="{% url 'health_stats' %}" class="btn btn-outline-dark rounded-pill px-4 fw-bold text-decoration-none">Add Health Stats</a>
+    <a href="#" class="btn btn-outline-dark rounded-pill px-4 fw-bold text-decoration-none">Explore Diet</a>
+    <a href="#" class="btn btn-outline-dark rounded-pill px-4 fw-bold text-decoration-none">Hire a Dietician</a>
+  </div>
+</div>
+
+<div class="px-4 mt-4">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-4 bg-white p-4 rounded-4 shadow-sm border border-success-subtle">
+    
+    <!-- Tip Text -->
+    <div class="flex-grow-1">
+      <p class="fw-bold text-success-emphasis fs-5 mb-1">
+        🌿 Wellness Tip of the Day
+      </p>
+      <p class="text-muted small mb-0">
+        💡 {{ random_tip }}
+      </p>
+    </div>
+
+    <!-- Tip Illustration -->
+    <div class="rounded-4 shadow-sm overflow-hidden"
+         style="flex: 1; min-height: 150px; background-image: url('{% static 'images/pexels-polina-tankilevitch-4519054.jpg' %}'); background-size: cover; background-position: center;">
+    </div>
+  </div>
+</div>
+
+
+    
+    <!-- Profile Card -->
+<div class="px-4 mt-4">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-4">
+    <div class="d-flex gap-4">
+      <div class="rounded-circle" style="background-image: url('{% if profile.photo %}{{ profile.photo.url }}{% else %}https://ui-avatars.com/api/?name={{ user.first_name|default:'User' }}&background=cccccc&color=000000&size=128{% endif %}'); background-size: cover; width: 8rem; height: 8rem;"></div>
+      <div class="d-flex flex-column justify-content-center">
+        <p class="fw-bold fs-5 mb-0">
+          {{ user.first_name|capfirst }}
+          <button type="button" class="border-0 bg-transparent p-0 ms-2" data-bs-toggle="modal" data-bs-target="#editProfileModal" title="Edit">✍</button>
+        </p>
+        <p class="text-success small">{{ profile.bio|default:"Fitness Enthusiast" }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <form method="POST" enctype="multipart/form-data" action="{% url 'edit_profile' %}">
+        {% csrf_token %}
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold" id="editProfileModalLabel">Edit Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body row g-4 py-3 px-4">
+          <div class="col-12">
+            <label class="form-label">Name</label>
+            <input type="text" name="first_name" value="{{ user.first_name }}" class="form-control rounded-pill px-3" required>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Profile Picture</label>
+            <input type="file" name="photo" accept="image/*" class="form-control rounded-pill px-3">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Bio/Status</label>
+            <input type="text" name="bio" value="{{ profile.bio }}" class="form-control rounded-pill px-3" placeholder="Fitness Enthusiast">
+          </div>
+        </div>
+
+        <div class="modal-footer border-0 px-4 pb-4">
+          <button type="submit" class="btn btn-success rounded-pill px-4 fw-semibold">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>    
+  </div>
+</div>
+{% endblock content %}
